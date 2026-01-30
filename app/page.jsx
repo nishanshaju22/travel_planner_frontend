@@ -7,19 +7,14 @@ import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    // Check authentication and redirect if logged in
+    console.log(isAuthenticated())
     if (isAuthenticated()) {
-      // Stub: would redirect to dashboard
-      // router.push('/dashboard');
+      router.push('/dashboard');
       console.log('User is authenticated - would redirect to /dashboard');
     }
-  }, [router]);
-
-  if (!mounted) return null;
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden">
