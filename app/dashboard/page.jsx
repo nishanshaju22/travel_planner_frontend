@@ -115,8 +115,8 @@ export default function DashboardPage() {
   ];
 
   const recentChats = [
-    { id: 1, name: 'Sarah', message: 'Ready for Bali?', time: '2m', avatar: '👩' },
-    { id: 2, name: 'Mike', message: 'Check out this hotel!', time: '15m', avatar: '👨' },
+    { id: 1, name: 'Sarah', message: 'Ready for Noida sector 5?', time: '2m', avatar: '👩' },
+    { id: 2, name: 'Mike', message: 'Check out nishans house!', time: '15m', avatar: '👨' },
     { id: 3, name: 'Emma', message: 'Flight confirmed ✈️', time: '1h', avatar: '👧' },
   ];
 
