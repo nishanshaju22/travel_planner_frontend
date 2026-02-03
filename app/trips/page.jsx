@@ -46,7 +46,8 @@ export default function TripsPage() {
         setTrips((prev) => [response.data.trip, ...prev]);
       }
     } catch (err) {
-      throw err;
+      setError(err.message || 'Failed to create trip');
+      console.error(err);
     }
   };
 
