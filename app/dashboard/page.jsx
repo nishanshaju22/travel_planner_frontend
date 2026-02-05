@@ -1,16 +1,13 @@
 'use client';
 import { useAuth } from '../../src/hooks/useAuth';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { userApi } from '../../src/api/userApi';
 import { useEffect } from 'react';
 import BucketListPopup from '../../src/components/BucketListPopup';
 
 export default function DashboardPage() {
-  const { user, logout } = useAuth();
-  const router = useRouter();
+  const { user } = useAuth();
   const [destination, setDestination] = useState('');
-  const [notifications] = useState(3);
   const [messages] = useState(5);
   const [bucketOpen, setBucketOpen] = useState(false);
   const [bucketItem, setBucketItem] = useState('');
@@ -30,7 +27,6 @@ export default function DashboardPage() {
 
     fetchBucketList();
   }, [bucketOpen, user?.id]);
-
 
   const handleLogout = async () => {
     await logout();
@@ -193,27 +189,6 @@ export default function DashboardPage() {
               </svg>
             </button>
 
-            {/* Notifications */}
-            <button className="relative w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              {notifications > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-bold">
-                  {notifications}
-                </span>
-              )}
-            </button>
-
-            {/* Logout */}
-            <button 
-              onClick={handleLogout}
-              className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition"
-            >
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
           </div>
         </div>
 
