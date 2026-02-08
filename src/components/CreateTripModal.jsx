@@ -9,6 +9,7 @@ export default function CreateTripModal({ isOpen, onClose, onCreate }) {
     name: '',
     plannedDate: '',
     plannedDuration: '',
+    budget: '',
     memberIds: [],
   });
   const [loading, setLoading] = useState(false);
@@ -57,12 +58,18 @@ export default function CreateTripModal({ isOpen, onClose, onCreate }) {
       return;
     }
 
+    if (formData.budget && parseFloat(formData.budget) < 0) {
+      setError('Budget cannot be negative');
+      return;
+    }
+
     setLoading(true);
     try {
       await onCreate({
         name: formData.name,
         plannedDate: new Date(formData.plannedDate).toISOString(),
         plannedDuration: parseInt(formData.plannedDuration),
+        budget: parseFloat(formData.budget),
         memberIds: formData.memberIds,
       });
 
@@ -132,6 +139,20 @@ export default function CreateTripModal({ isOpen, onClose, onCreate }) {
                 onChange={handleChange}
                 placeholder="e.g., 7"
                 min="1"
+                className="w-full px-4 py-2 border border-sand-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-colors"
+              />
+            </div>
+
+            {/* New Budget Field */}
+            <div>
+              <label className="block text-sm font-medium text-earth-700 mb-1">Budget ($)</label>
+              <input
+                type="number"
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                placeholder="e.g., 1000"
+                min="0"
                 className="w-full px-4 py-2 border border-sand-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-colors"
               />
             </div>

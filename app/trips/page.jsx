@@ -22,7 +22,7 @@ export default function TripsPage() {
 
       try {
         setLoading(true);
-        const response = await tripsApi.getAllTrips(user.id);
+        const response = await tripsApi.getAllTrips();
         
         if (response.status === 'success') {
           setTrips(Array.isArray(response.data.trips) ? response.data.trips : response.data.trips ? [response.data.trips] : []);
@@ -40,7 +40,7 @@ export default function TripsPage() {
 
   const handleCreateTrip = async (tripData) => {
     try {
-      const response = await tripsApi.createTrip(user.id, tripData);
+      const response = await tripsApi.createTrip(tripData);
       
       if (response.status === 'success') {
         setTrips((prev) => [response.data.trip, ...prev]);
@@ -53,7 +53,7 @@ export default function TripsPage() {
 
   const handleDeleteTrip = async (tripId) => {
     try {
-      const response = await tripsApi.deleteTrip(user.id, tripId);
+      const response = await tripsApi.deleteTrip(tripId);
       
       if (response.status === 'success') {
         setTrips((prev) => prev.filter((trip) => trip.id !== tripId));
